@@ -4,8 +4,12 @@ import pickle
 import os
 
 # Load model and preprocessor
-model = load_pickle(open('random_forest_model.pkl', 'rb'))
-preprocessor = load_pickle(open('preprocessor.pkl', 'rb'))
+
+with open('random_forest_model.pkl', 'rb') as file:
+    model = pickle.load(file)
+
+with open('preprocessor.pkl', 'rb') as file:
+  
 
 # Input form for user
 st.title('Prediksi Output untuk Online Foods')
