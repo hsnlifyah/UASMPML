@@ -9,8 +9,7 @@ with open('random_forest_model.pkl', 'rb') as file:
     model = pickle.load(file)
 
 with open('preprocessor.pkl', 'rb') as file:
-  
-
+    model = pickle.load(file)
 # Input form for user
 st.title('Prediksi Output untuk Online Foods')
 
