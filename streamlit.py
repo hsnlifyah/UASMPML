@@ -4,7 +4,7 @@ import pickle
 import os
 
 # Ensure sklearn is installed
-%pip install scikit-learn
+pip install scikit-learn
 try:
     import sklearn
 except ImportError:
