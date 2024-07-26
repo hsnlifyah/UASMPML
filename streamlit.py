@@ -1,13 +1,13 @@
 import streamlit as st
 import pandas as pd
-import numpy as np
 import pickle
 
 # Load model and preprocessor
-   with open('random_forest_model.pkl', 'rb') as file:
-        model = pickle.load(file)
-   with open('preprocessor.pkl', 'rb') as file:
-        model = pickle.load(file)
+with open('random_forest_model.pkl', 'rb') as model_file:
+    model = pickle.load(model_file)
+
+with open('preprocessor.pkl', 'rb') as preprocessor_file:
+    preprocessor = pickle.load(preprocessor_file)
 
 # Input form for user
 st.title('Prediksi Output untuk Online Foods')
@@ -56,3 +56,4 @@ if st.button('Predict'):
         st.error(f"Error during preprocessing: {e}")
     except Exception as e:
         st.error(f"Terjadi kesalahan: {e}")
+
