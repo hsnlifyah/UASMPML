@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import joblib
-
+import sklearn
 # Load and preprocess data
 df = pd.read_csv("C:\\Users\\ASUS\\Documents\\Semester 4\\MPML_UAS\\FinalExam\\FinalExam\\onlinefoods.csv")
 
