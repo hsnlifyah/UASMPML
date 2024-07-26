@@ -1,13 +1,26 @@
 import streamlit as st
 import pandas as pd
 import pickle
+import os
+
+# Function to load pickle file safely
+def load_pickle(file_path):
+    if os.path.exists(file_path):
+        try:
+            with open(file_path, 'rb') as file:
+                return pickle.load(file)
+        except Exception as e:
+            st.error(f"Error loading {file_path}: {e}")
+    else:
+        st.error(f"File {file_path} not found")
+    return None
 
 # Load model and preprocessor
-with open('random_forest_model.pkl', 'rb') as model_file:
-    model = pickle.load(model_file)
+model = load_pickle('random_forest_model.pkl')
+preprocessor = load_pickle('preprocessor.pkl')
 
-with open('preprocessor.pkl', 'rb') as preprocessor_file:
-    preprocessor = pickle.load(preprocessor_file)
+if model is None or preprocessor is None:
+    st.stop()
 
 # Input form for user
 st.title('Prediksi Output untuk Online Foods')
@@ -56,4 +69,5 @@ if st.button('Predict'):
         st.error(f"Error during preprocessing: {e}")
     except Exception as e:
         st.error(f"Terjadi kesalahan: {e}")
+
 
