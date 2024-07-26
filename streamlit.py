@@ -1,53 +1,16 @@
 
 import pandas as pd
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler, OneHotEncoder
-from sklearn.compose import ColumnTransformer
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.impute import SimpleImputer
-import joblib
-
-# Load and preprocess data
-df = pd.read_csv("C:\\Users\\ASUS\\Documents\\Semester 4\\MPML_UAS\\FinalExam\\FinalExam\\onlinefoods.csv")
-
-# Handle missing values
-imputer = SimpleImputer(strategy='mean')
-df['Age'] = imputer.fit_transform(df[['Age']])
-
-# Encode categorical variables
-categorical_features = ['Gender', 'Marital Status', 'Occupation', 'Monthly Income', 'Educational Qualifications', 'Feedback']
-numerical_features = ['Age', 'Family size', 'latitude', 'longitude']
-
-preprocessor = ColumnTransformer(
-    transformers=[
-        ('num', StandardScaler(), numerical_features),
-        ('cat', OneHotEncoder(), categorical_features)])
-
-# Split the dataset
-X = df.drop('Output', axis=1)
-y = df['Output']
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-
-# Apply preprocessing
-X_train = preprocessor.fit_transform(X_train)
-X_test = preprocessor.transform(X_test)
-
-# Train model
-model = RandomForestClassifier()
-model.fit(X_train, y_train)
-
-# Save model and preprocessor
-joblib.dump(model, 'random_forest_model.pkl')
-joblib.dump(preprocessor, 'preprocessor.pkl')
-
 import streamlit as st
 import pandas as pd
 import numpy as np
 import joblib
 
+# Load and preprocess data
+df = pd.read_csv("C:\\Users\\ASUS\\Documents\\Semester 4\\MPML_UAS\\FinalExam\\FinalExam\\onlinefoods.csv")
+
 # Load model and preprocessor
-model = joblib.load('random_forest_model.pkl')
-preprocessor = joblib.load('preprocessor.pkl')
+model = joblib.load("C:\\Users\\ASUS\\Documents\\Semester 4\\MPML_UAS\\FinalExam\\FinalExam\\random_forest_model.pkl")
+preprocessor = joblib.load("C:\\Users\\ASUS\\Documents\\Semester 4\\MPML_UAS\\FinalExam\\FinalExam\\preprocessor.pkl")
 
 # Input form for user
 st.title('Prediksi Output untuk Online Foods')
