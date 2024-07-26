@@ -3,24 +3,9 @@ import pandas as pd
 import pickle
 import os
 
-# Function to load pickle file safely
-def load_pickle(file_path):
-    if os.path.exists(file_path):
-        try:
-            with open(file_path, 'rb') as file:
-                return pickle.load(file)
-        except Exception as e:
-            st.error(f"Error loading {file_path}: {e}")
-    else:
-        st.error(f"File {file_path} not found")
-    return None
-
 # Load model and preprocessor
-model = load_pickle('random_forest_model.pkl')
-preprocessor = load_pickle('preprocessor.pkl')
-
-if model is None or preprocessor is None:
-    st.stop()
+model = load_pickle(open('random_forest_model.pkl', 'rb'))
+preprocessor = load_pickle(open('preprocessor.pkl', 'rb'))
 
 # Input form for user
 st.title('Prediksi Output untuk Online Foods')
