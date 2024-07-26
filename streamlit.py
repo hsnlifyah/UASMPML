@@ -2,8 +2,12 @@ import streamlit as st
 import pandas as pd
 import pickle
 import os
-import sklearn
 
+# Ensure sklearn is installed
+try:
+    import sklearn
+except ImportError:
+    st.error("Scikit-learn is not installed. Please install it using 'pip install scikit-learn'.")
 # Function to load pickle file safely
 def load_pickle(file_path):
     if os.path.exists(file_path):
